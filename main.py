@@ -60,27 +60,6 @@
 # print(sum_l)
 
 # Task 5
-def encode_en(text):
-    alph = "abcdefghijklmnopqrstuvwxyzabc"
-    alph_b = "ABCDEFGHIJKLMNOPQRSTUVWXYZABC"
-    result = ""
-    for i in range(len(text)):
-        for j in text[i]:
-            if j == " ":
-                result += " "
-            if j == "/n":
-                result += j
-            if j.isupper():
-                letter = alph_b.find(j)
-                code = letter + (i + 1)
-                result += alph_b[code]
-            else:
-                letter = alph.find(j)
-                code = letter + (i + 1)
-                result += alph[code]
-    return result
-
-
 with open("some_str.txt", "r") as f:
     text = f.readlines()
 alph = "abcdefghijklmnopqrstuvwxyzabc"
