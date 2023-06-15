@@ -38,7 +38,6 @@
 # print(final)
 
 # Task 3 hyinja
-
 # with open('students.txt', 'r') as f:
 #     for line in f:
 #         student_info = line.strip().split()
