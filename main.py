@@ -115,6 +115,8 @@ def add_employee_js():
     with open('employees.json', 'w') as jf:
         data.append(new_emp)
         json.dump(data, jf, indent=4)
+    print("Done")
+    print()
 
 
 def add_employee_csv():
@@ -128,15 +130,21 @@ def add_employee_csv():
     with open('employees.csv', 'a') as csvf:
         writer = csv.writer(csvf, delimiter=",", lineterminator="\r")
         writer.writerow([name,birthday, height, weight, car, language])
+    print("Done")
+    print()
 
 
 def tran_fj_tc():
-    with open('employees.json', 'r') as json_file, open('employees.csv', 'w') as csv_file:
+    with open('employees.json', 'r') as jf, open('employees.csv', 'w') as csvf:
         data = json.load(jf)
         writer = csv.writer(csvf, delimiter=",", lineterminator="\r")
         writer.writerow(data[0].keys())
         for item in data:
             writer.writerow([item['name'], item['birthday'], item['height'], item['weight'], item['car'], item['languages']])
+        print("Done")
+        print()
+
+
 
 def find_info():
     with open('employees.json', 'r') as jf:
@@ -150,7 +158,51 @@ def find_info():
             print(f"weight: {i['weight']}")
             print(f"car: {i['car']}")
             print(f"languages: {i['languages']}")
-            return
         print(f"Employee with name '{find}' not found")
+    print()
+
+def find_lang():
+    with open('employees.json', 'r') as jf:
+        data = json.load(jf)
+    find = input("What language do you need? ")
+    for i in data:
+        for j in i['languages']:
+            if j == find:
+                print(f"Next employee can code in this lancuage: {i['name']}")
+    print()
+
+
+def menu():
+    print("If you want to SAVE information from the JSON file to the CSV file - press 1")
+    print("If you want to ADD an employee to the JSON - press 2")
+    print("If you want to ADD an employee to the CSV - press 3")
+    print("If you want to FIND an employee - press 4")
+    print("If you want to FIND an employee with specific LANGUAGE - press 5")
+    print("To exit press 10")
+    request = int(input("What do you want to do? "))
+    while request != 10:
+        if request == 1:
+            tran_fj_tc()
+            return menu()
+        elif request == 2:
+            add_employee_js()
+            return menu()
+        elif request == 3:
+            add_employee_csv()
+            return menu()
+        elif request == 4:
+            find_info()
+            return menu()
+        elif request == 5:
+            find_lang()
+            return menu()
+    else:
+        print("Bye")
+
+
+print("Hi, this is simple program to use for")
+menu()
+
+
 
 
