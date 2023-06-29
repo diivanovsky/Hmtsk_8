@@ -138,4 +138,19 @@ def tran_fj_tc():
         for item in data:
             writer.writerow([item['name'], item['birthday'], item['height'], item['weight'], item['car'], item['languages']])
 
+def find_info():
+    with open('employees.json', 'r') as jf:
+        data = json.load(jf)
+    find = input("Whom you'd like to find? ")
+    for i in data:
+        if i['name'] == find:
+            print(f"Name: {i['name']}")
+            print(f"birthday: {i['birthday']}")
+            print(f"height: {i['height']}")
+            print(f"weight: {i['weight']}")
+            print(f"car: {i['car']}")
+            print(f"languages: {i['languages']}")
+            return
+        print(f"Employee with name '{find}' not found")
+
 
