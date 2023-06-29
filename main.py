@@ -1,3 +1,6 @@
+import json
+import csv
+
 def common(ln):
     n_l = {}
     for word in ln:
@@ -88,3 +91,51 @@ for i in range(len(text)):
     result += "\n"
 
 print(result)
+
+# Task 5
+
+def add_employee_js():
+    name = input("Enter employee name: ")
+    birthday = input("Enter employee birthday: ")
+    height = input("Enter employee height: ")
+    weight = input("Enter employee weight: ")
+    car = input("Has he got a car - true or false: ")
+    language = input("Enter employee language: ")
+    language = language.split(" ")
+    new_emp =     {
+        "name": name,
+        "birthday": birthday,
+        "height": height,
+        "weight": weight,
+        "car": car,
+        "languages": language
+    }
+    with open('employees.json', 'r') as jf:
+        data = json.load(jf)
+    with open('employees.json', 'w') as jf:
+        data.append(new_emp)
+        json.dump(data, jf, indent=4)
+
+
+def add_employee_csv():
+    name = input("Enter employee name: ")
+    birthday = input("Enter employee birthday: ")
+    height = input("Enter employee height: ")
+    weight = input("Enter employee weight: ")
+    car = input("Has he got a car - true or false: ")
+    language = input("Enter employee language: ")
+    language = language.split(" ")
+    with open('employees.csv', 'a') as csvf:
+        writer = csv.writer(csvf, delimiter=",", lineterminator="\r")
+        writer.writerow([name,birthday, height, weight, car, language])
+
+
+def tran_fj_tc():
+    with open('employees.json', 'r') as json_file, open('employees.csv', 'w') as csv_file:
+        data = json.load(jf)
+        writer = csv.writer(csvf, delimiter=",", lineterminator="\r")
+        writer.writerow(data[0].keys())
+        for item in data:
+            writer.writerow([item['name'], item['birthday'], item['height'], item['weight'], item['car'], item['languages']])
+
+
